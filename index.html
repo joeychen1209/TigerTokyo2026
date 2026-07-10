@@ -66,8 +66,9 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--orange), var(--orange-2));
-      box-shadow: 0 8px 20px rgba(255, 122, 24, .32);
+      background: linear-gradient(135deg, var(--paper), var(--cream));
+      color: var(--navy);
+      box-shadow: 0 8px 20px rgba(249, 115, 19, 0.32);
     }
 
     .nav-links {
@@ -94,7 +95,7 @@
       padding: 84px 20px 64px;
       background:
         linear-gradient(135deg, rgba(20, 28, 47, .92), rgba(255, 122, 24, .78)),
-        url("https://images.unsplash.com/photo-1508344928928-7165b67de128?auto=format&fit=crop&w=1800&q=80");
+        url("background.png");
       background-size: cover;
       background-position: center;
       position: relative;
@@ -104,7 +105,7 @@
     .hero::after {
       content: "";
       position: absolute;
-      inset: auto -10% -130px -10%;
+      inset: auto -10% -200px -10%;
       height: 240px;
       background: #fffaf3;
       transform: rotate(-3deg);
@@ -132,7 +133,7 @@
     }
 
     h1 {
-      font-size: clamp(38px, 7vw, 82px);
+      font-size: clamp(38px, 5vw, 82px);
       line-height: 1.05;
       margin: 0 0 18px;
       font-weight: 950;
@@ -210,10 +211,26 @@
     .count-box strong { display: block; font-size: clamp(28px, 5vw, 48px); line-height: 1; }
     .count-box span { font-size: 13px; opacity: .9; }
 
+    .countdown-finished {
+      display: none;
+      width: min(620px, 100%);
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 14px 32px rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .countdown-finished img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     section {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 76px 20px;
+      padding: 20px 20px;
     }
 
     .section-title { margin-bottom: 30px; }
@@ -298,7 +315,7 @@
     .time-list .time { font-weight: 950; color: #d95f00; }
 
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .daily-reminder { margin-top: 14px; padding: 12px 14px; border-radius: 16px; background: #fff4cf; border: 1px solid #ffd36b; color: #7a3f00; font-weight: 900; }
+    .daily-reminder { margin-top: 14px; margin-bottom: 14px; padding: 12px 14px; border-radius: 16px; background: #fff4cf; border: 1px solid #ffd36b; color: #7a3f00; font-weight: 900; }
     .tag { display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 999px; background: #fff1db; color: #d95f00; font-size: 13px; font-weight: 900; }
     .tag.blue { background: #eaf1ff; color: #1d4ed8; }
     .tag.green { background: #eafaf3; color: #047857; }
@@ -333,9 +350,19 @@
     }
 
     @media (max-width: 560px) {
-      section { padding: 58px 16px; }
+      section { padding: 16px 16px; }
       .hero { min-height: auto; padding: 72px 16px 58px; }
-      .countdown, .overview, .links-grid, .notes { grid-template-columns: 1fr; }
+      .overview, .links-grid, .notes { grid-template-columns: 1fr; }
+      .countdown {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .count-box {
+        padding: 12px 3px;
+        border-radius: 14px;
+      }
+      .count-box strong { font-size: clamp(24px, 9vw, 36px); }
+      .count-box span { font-size: 11px; }
       .time-list li { grid-template-columns: 72px 1fr; }
       .brand { font-size: 14px; }
     }
@@ -343,7 +370,7 @@
 </head>
 <body>
   <nav class="nav">
-    <div class="brand"><span class="brand-mark">⚾</span> 野球虎東京暑訓</div>
+    <div class="brand"><span class="brand-mark">野</span> 野球虎東京暑訓</div>
     <div class="nav-links">
       <a href="#about">旅程亮點</a>
       <a href="#timeline">行程總覽</a>
@@ -358,24 +385,19 @@
     <div class="hero-inner">
       <div class="eyebrow">2026.07.13 - 07.18｜日本千葉・東京</div>
       <h1>2026 盛夏東京移地暑訓</h1>
-      <p class="hero-lead">野球虎日本千葉國際交流，結合職棒觀賽、甲子園預賽、棒球教室、運科檢測、國際友誼賽與家長自由行程。</p>
-      <div class="hero-pills">
-        <span class="pill">⚾ 球員訓練交流</span>
-        <span class="pill">🏟 NPB 二軍觀賽</span>
-        <span class="pill">⛩ 成田新勝寺</span>
-        <span class="pill">🛍 Outlet 自由活動</span>
-        <span class="pill">🗼 東京住宿</span>
-      </div>
+      <p class="hero-lead">野球虎日本千葉國際交流活動</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#schedule">查看每日行程</a>
-        <a class="btn btn-ghost" href="#parents">家長行程</a>
         <a class="btn btn-ghost" href="itinerary.pdf" target="_blank">完整 PDF</a>
       </div>
-      <div class="countdown" aria-label="行程倒數">
+      <div class="countdown" id="countdown" aria-label="行程倒數">
         <div class="count-box"><strong id="days">00</strong><span>天</span></div>
         <div class="count-box"><strong id="hours">00</strong><span>時</span></div>
         <div class="count-box"><strong id="minutes">00</strong><span>分</span></div>
         <div class="count-box"><strong id="seconds">00</strong><span>秒</span></div>
+      </div>
+      <div class="countdown-finished" id="countdownFinished" aria-live="polite">
+        <img src="tigerStart.jpg" alt="活動正式開始" />
       </div>
     </div>
   </header>
@@ -384,22 +406,21 @@
     <div class="section-title">
       <small>TRIP HIGHLIGHTS</small>
       <h2>旅程亮點</h2>
-      <p>網站資訊以活動行程 PDF 與新增家長行程為基礎，球員與家長可快速分流閱讀。</p>
     </div>
     <div class="overview">
-      <div class="mini-card"><div class="icon">✈️</div><h3>6 天 5 夜</h3><p>7/13 出發、7/18 返程，前段柏之葉，後段東京九段下。</p></div>
-      <div class="mini-card"><div class="icon">⚾</div><h3>棒球交流</h3><p>棒球教室、合訓、練球與國際友誼賽。</p></div>
+      <div class="mini-card"><div class="icon">✈️</div><h3>6 天 5 夜</h3><p>7/13 出發、7/18 返程<br/>7/13 三井花園飯店柏葉公園旁<br/>7/16 Hotel Villa Fontaine 東京九段下。</p></div>
+      <div class="mini-card"><div class="icon">⚾</div><h3>棒球交流</h3><p>棒球教室、合訓、練球與友誼賽。</p></div>
       <div class="mini-card"><div class="icon">📊</div><h3>運科檢測</h3><p>體驗日本棒球以數據輔助訓練的理念。</p></div>
-      <div class="mini-card"><div class="icon">👨‍👩‍👧</div><h3>家長行程</h3><p>7/15 新勝寺、7/16 Outlet 與曙山農業公園／東海寺。</p></div>
+      <div class="mini-card"><div class="icon">👨‍👩‍👧</div><h3>家長行程</h3><p>7/15 成田新勝寺、7/16 三井Outlet 與曙山農業公園／東海寺。</p></div>
     </div>
     <div class="notice">
       <div class="notice-card">
         <h3>行程閱讀方式</h3>
-        <p>每日卡片分為「球員行程」與「家長行程」。若家長想自行停留，可依會合時間前往球場，並以現場公告為準。</p>
+        <p>每日卡片分為「球員行程」與「家長行程」。7/15、7/16 家長可依個人安排自由活動，但請留意與球隊會合時間。</p>
       </div>
       <div class="notice-card">
         <h3>Day 6 接駁提醒</h3>
-        <p>7/18 安排 45 人座大巴，10:30 於噴泉別墅飯店東京九段下集合，前往成田機場。</p>
+        <p>7/18 10:00 於飯店大廳集合，前往成田機場。</p>
       </div>
     </div>
   </section>
@@ -411,10 +432,10 @@
       <p>用時間軸快速掌握本次移地暑訓重點。</p>
     </div>
     <div class="timeline">
-      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/13 Day 1</b> 成田機場 T2 完成入境，前往超野球專門店 CV 參加手套保養課程，入住柏之葉。</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/13 Day 1</b> 成田機場 T2 完成入境，前往超野球專門店 CV 參加手套保養課程，入住三井花園飯店柏葉公園旁。</div></div>
       <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/14 Day 2</b> 火腿二軍鎌谷球場體驗，參觀球場設施、開球活動說明、跑壘體驗與觀賽。</div></div>
       <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/15 Day 3</b> 球員觀賞甲子園預賽、體驗 Field Force 棒球訓練器材，下午進行練球或友誼賽交流；家長可前往成田新勝寺。</div></div>
-      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/16 Day 4</b> 球員進行 INVICTUS SPORTS 運動機能測試，下午於富勢運動場練球與友誼賽交流；家長可前往 Outlet、曙山農業公園／東海寺。</div></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/16 Day 4</b> 球員進行 INVICTUS SPORTS 運動機能測試，下午於富勢運動場練球與友誼賽交流；家長可前往 三井Outlet、曙山農業公園／東海寺。</div></div>
       <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/17 Day 5</b> 白天東京自由行，傍晚東京巨蛋集合，觀賞讀賣巨人 vs 中日龍比賽。</div></div>
       <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><b>7/18 Day 6</b> 飯店早餐後出發前往成田機場，準備返台。</div></div>
     </div>
@@ -424,28 +445,39 @@
     <div class="section-title">
       <small>DAILY SCHEDULE</small>
       <h2>每日行程</h2>
-      <p>重點版行程，適合放在首頁讓家長與球員快速查看。</p>
     </div>
     <div class="schedule-grid">
       <article class="day-card">
-        <div class="day-head"><small>DAY 1｜7/13（一）</small><h3>抵達日本・前往柏市</h3></div>
+        <div class="day-head"><small>DAY 1｜7/13（一）</small><h3>抵達與初探</h3></div>
         <div class="day-body">
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
-              <li><span class="time">14:15</span><span>成田機場 T2 完成入境（暫定 B 口／北口集合），搭乘巴士出發。</span></li>
+              <li><span class="time">14:15</span><span>成田機場於T2 B口(北口)集合，搭乘巴士出發。</span></li>
               <li><span class="time">15:30</span><span>超野球專門店 CV，手套保養課程。</span></li>
-              <li><span class="time">17:15</span><span>離開超野球專門店 CV，出發前往飯店。</span></li>
-              <li><span class="time">18:30</span><span>抵達三井花園飯店柏之葉，辦理入住。</span></li>
+              <li><span class="time">17:15</span><span>前往LaLaport，與家長會合，晚餐自理。</span></li>
+              <li><span class="time">18:30</span><span>前往三井花園飯店柏葉公園旁，辦理入住。</span></li>
             </ul>
           </div>
-          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4><ul><li>下機後請先購買便利的餐點。</li><li>飯店步行約 7 分鐘有全家，飯店坐落於棒球場旁。</li></ul></div>
+           <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4>
+            <ul class="time-list">
+              <li><span class="time">16:30</span><span>前往LaLaport。</span></li>
+            </ul>
+          </div>
           <div class="daily-reminder">👕 今日提醒：請穿千葉球服。</div>
-          <div class="tag-row"><span class="tag">抵達日</span><span class="tag green">手套保養</span><span class="tag">千葉球服</span></div>
+
+          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4>
+            <ul>
+              <li>下機後請先購買便利的餐點。</li>
+              <li>有參加手套保養課程，請將手套放入隨身行李。</li>
+              <li>飯店步行約 7 分鐘有全家，飯店坐落於棒球場旁。</li>
+            </ul>
+          </div>
+          <div class="tag-row"><span class="tag">抵達日</span><span class="tag green">手套保養</span></div>
         </div>
       </article>
 
       <article class="day-card">
-        <div class="day-head"><small>DAY 2｜7/14（二）</small><h3>火腿二軍鎌谷球場體驗</h3></div>
+        <div class="day-head"><small>DAY 2｜7/14（二）</small><h3>職棒見習日</h3></div>
         <div class="day-body">
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
@@ -453,69 +485,79 @@
               <li><span class="time">08:30</span><span>飯店大廳集合出發。</span></li>
               <li><span class="time">10:00</span><span>參觀鎌谷球場與設施。</span></li>
               <li><span class="time">12:15</span><span>開球活動說明及跑壘體驗。</span></li>
-              <li><span class="time">13:00</span><span>觀賞火腿二軍比賽。</span></li>
-              <li><span class="time">16:30</span><span>離開鎌谷球場。</span></li>
-              <li><span class="time">18:30</span><span>KASHIWA BASE BBQ 團體聚餐。</span></li>
+              <li><span class="time">13:00</span><span>觀賞 日本火腿二軍 vs 樂天金鷲二軍 比賽。</span></li>
+              <li><span class="time">16:30</span><span>返回飯店。</span></li>
+              <li><span class="time">18:30</span><span>團體聚餐 @ KASHIWA BASE BBQ </span></li>
             </ul>
           </div>
-          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4><ul><li>建議準備防曬、飲水、輕便隨身包。</li><li>觀賽時可拍照記錄孩子的球場體驗。</li></ul></div>
           <div class="daily-reminder">✍️ 今日提醒：請帶簽字筆。</div>
-          <div class="tag-row"><span class="tag">球場體驗</span><span class="tag blue">鎌谷球場</span><span class="tag">簽字筆</span></div>
+          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4><ul><li>建議準備防曬、飲水、輕便隨身包。</li><li>觀賽時可拍照記錄孩子的球場體驗。</li></ul></div>
+          <div class="tag-row"><span class="tag">鎌谷球場</span><span class="tag green">球場體驗</span></div>
         </div>
       </article>
 
       <article class="day-card featured" id="parents">
-        <div class="day-head"><small>DAY 3｜7/15（三）</small><h3>棒球訓練 & 交流</h3></div>
+        <div class="day-head"><small>DAY 3｜7/15（三）</small><h3>訓練與友誼交流</h3></div>
         <div class="day-body">
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">06:30</span><span>飯店早餐 Start。</span></li>
-              <li><span class="time">08:30</span><span>前往柏之葉公園棒球場，觀賞甲子園預賽（第三輪 64 強）。</span></li>
-              <li><span class="time">11:00</span><span>離開柏之葉公園。</span></li>
-              <li><span class="time">11:15</span><span>抵達 Field Force，體驗棒球訓練器材。</span></li>
-              <li><span class="time">14:30</span><span>離開 Field Force。</span></li>
+              <li><span class="time">08:30</span><span>前往柏之葉公園棒球場，觀賞甲子園預賽。</span></li>
+              <li><span class="time">11:00</span><span>前往 Field Force。</span></li>
+              <li><span class="time">11:15</span><span>Field Force 體驗棒球訓練器材。</span></li>
+              <li><span class="time">14:30</span><span>前往球場。</span></li>
               <li><span class="time">15:00</span><span>抵達球場，進行練球或友誼賽交流。</span></li>
-              <li><span class="time">20:00</span><span>抵達飯店享用晚餐。</span></li>
             </ul>
           </div>
           <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4>
             <ul class="time-list">
-              <li><span class="time">11:00</span><span>柏之葉野球公園出發，前往成田新勝寺。</span></li>
-              <li><span class="time">12:00</span><span>抵達成田新勝寺，午餐與自由活動。</span></li>
-              <li><span class="time">15:00</span><span>離開新勝寺，前往球場。</span></li>
-              <li><span class="time">16:00</span><span>左右與球員會合，觀看友誼賽／練球。</span></li>
+              <li><span class="time">08:30</span><span>前往柏之葉公園棒球場，觀賞甲子園預賽。</span></li>
+              <li><span class="time">11:00</span><span>前往成田新勝寺。</span></li>
+              <li><span class="time">12:00</span><span>表參道午餐與自由活動。</span></li>
+              <li><span class="time">15:30</span><span>前往球場。</span></li>
+              <li><span class="time">17:00</span><span>與球員會合，觀看友誼賽。</span></li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">訓練交流</span><span class="tag blue">新勝寺</span><span class="tag green">友誼賽</span></div>
+            <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4>
+            <ul>
+              <li>晚餐 球員享用日式餐盒，家長自理。</li>
+            </ul>
+          </div>
+          <div class="tag-row"><span class="tag">甲子園</span><span class="tag">友誼賽</span><span class="tag green">體驗訓練</span><span class="tag blue">新勝寺</span></div>
         </div>
       </article>
 
       <article class="day-card featured">
-        <div class="day-head"><small>DAY 4｜7/16（四）</small><h3>運科 & 交流</h3></div>
+        <div class="day-head"><small>DAY 4｜7/16（四）</small><h3>運科與友誼交流</h3></div>
         <div class="day-body">
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">06:30</span><span>飯店早餐 Start。</span></li>
-              <li><span class="time">09:00</span><span>飯店大廳集合出發。</span></li>
+              <li><span class="time">09:00</span><span>前往 INVICTUS SPORTS 。</span></li>
               <li><span class="time">10:00</span><span>INVICTUS SPORTS 運動機能測試。</span></li>
-              <li><span class="time">14:00</span><span>離開 INVICTUS SPORTS。</span></li>
-              <li><span class="time">15:00</span><span>富勢運動場棒球場練球與友誼賽交流。</span></li>
+              <li><span class="time">14:00</span><span>前往富勢運動場。</span></li>
+              <li><span class="time">15:00</span><span>抵達球場，進行練球或友誼賽交流。</span></li>
               <li><span class="time">19:00</span><span>前往東京。</span></li>
-              <li><span class="time">20:30</span><span>抵達東京飯店（JR 水道橋／JR 神保町）。</span></li>
+              <li><span class="time">20:30</span><span>抵達飯店。</span></li>
             </ul>
           </div>
           <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4>
             <ul class="time-list">
-              <li><span class="time">09:00</span><span>出發前往三井 Outlet Park 幕張。</span></li>
+              <li><span class="time">09:00</span><span>前往三井 Outlet Park 幕張。</span></li>
               <li><span class="time">10:00</span><span>抵達 Outlet，自由活動與購物。</span></li>
-              <li><span class="time">12:30</span><span>出發前往曙山農業公園／東海寺。</span></li>
-              <li><span class="time">13:30</span><span>抵達，自由參觀。</span></li>
-              <li><span class="time">14:50</span><span>前往富勢運動場。(想繼續逛的家長可以自行前往球場：車程5分鐘）</span></li>
-              <li><span class="time">15:00</span><span>抵達富勢運動場，觀看合訓與友誼賽。</span></li>
-              <li><span class="time">20:30</span><span>抵達東京，可自由參加教練團聚餐（餐廳資訊另行公告）。</span></li>
+              <li><span class="time">12:30</span><span>前往曙山農業公園／東海寺。</span></li>
+              <li><span class="time">14:45</span><span>前往富勢運動場。(想繼續逛的家長可以自行前往球場：車程5分鐘）</span></li>
+              <li><span class="time">15:00</span><span>抵達球場，觀看友誼賽。</span></li>
+              <li><span class="time">20:30</span><span>抵達東京。</span></li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">科學化訓練</span><span class="tag blue">Mitsui Outlet</span><span class="tag green">合訓友誼賽</span></div>
+          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4>
+            <ul>
+              <li>抵達飯店領取比賽門票。</li>
+              <li>晚餐 球員待定，家長自理或聚餐。</li>
+            </ul>
+          </div>
+          <div class="tag-row"><span class="tag">友誼賽</span><span class="tag green">科學化訓練</span><span class="tag blue">Mitsui Outlet</span></div>
         </div>
       </article>
 
@@ -525,17 +567,18 @@
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">07:00</span><span>飯店早餐 Start。</span></li>
-              <li><span class="time">17:00</span><span>東京巨蛋集合。</span></li>
-              <li><span class="time">18:00</span><span>觀賞讀賣巨人 vs 中日龍比賽。</span></li>
+              <li><span class="time">09:00</span><span>自由行。</span></li>
+              <li><span class="time">16:00</span><span>東京巨蛋可開始入場。</span></li>
+              <li><span class="time">18:00</span><span>觀賞 讀賣巨人 vs 中日龍 比賽。</span></li>
             </ul>
           </div>
-          <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4><ul><li>東京市區自由行、採買、景點參訪或休息。</li><li>可依飯店位置安排水道橋、神保町、東京巨蛋周邊活動。</li></ul></div>
-          <div class="tag-row"><span class="tag blue">東京探索</span><span class="tag">東京巨蛋</span></div>
+          <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4><ul><li>餐食提醒：全日餐食皆為自理。</li></ul></div>
+          <div class="tag-row"><span class="tag">自由行</span><span class="tag">東京巨蛋</span></div>
         </div>
       </article>
 
       <article class="day-card">
-        <div class="day-head"><small>DAY 6｜7/18（六）</small><h3>返程</h3></div>
+        <div class="day-head"><small>DAY 6｜7/18（六）</small><h3>滿載回憶，平安返程</h3></div>
         <div class="day-body">
           <div class="track player"><h4>🚌 球員與團隊</h4>
             <ul class="time-list">
@@ -544,7 +587,7 @@
               <li><span class="time">12:00</span><span>抵達成田機場。</span></li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">返台日</span><span class="tag blue">機場接駁</span></div>
+          <div class="tag-row"><span class="tag">返台日</span></div>
         </div>
       </article>
     </div>
@@ -554,23 +597,22 @@
     <div class="section-title">
       <small>HOTELS</small>
       <h2>住宿資訊</h2>
-      <p>行程中提到的兩段住宿位置，方便家長查看。</p>
     </div>
     <div class="hotel-grid">
       <div class="hotel-card">
-        <h3>柏之葉住宿</h3>
+        <h3>三井花園飯店柏葉公園旁</h3>
         <p>三井ガーデンホテル柏の葉パークサイド｜Mitsui Garden Hotel Kashiwa-no-ha Park Side。步行約 7 分鐘有全家，飯店坐落於棒球場旁。</p>
         <div class="card-actions">
           <a class="small-btn" href="https://www.gardenhotels.co.jp/kashiwanoha-parkside/eng/" target="_blank" rel="noopener">官方網站</a>
-          <a class="small-btn blue" href="https://www.google.com/maps/search/?api=1&query=Mitsui%20Garden%20Hotel%20Kashiwa-no-ha%20Park%20Side" target="_blank" rel="noopener">Google Map</a>
+          <a class="small-btn blue" href="https://maps.app.goo.gl/FNShLngB4AdAF8Pt5" target="_blank" rel="noopener">Google Map</a>
         </div>
       </div>
       <div class="hotel-card">
-        <h3>東京住宿</h3>
+        <h3>Hotel Villa Fontaine 東京九段下</h3>
         <p>ホテルヴィラフォンテーヌ東京九段下｜Hotel Villa Fontaine Tokyo Kudanshita。JR 水道橋步行約 10 分鐘，神保町步行約 5 分鐘。</p>
         <div class="card-actions">
           <a class="small-btn" href="https://www.hvf.jp/eng/kudanshita/" target="_blank" rel="noopener">官方網站</a>
-          <a class="small-btn blue" href="https://www.google.com/maps/search/?api=1&query=Hotel%20Villa%20Fontaine%20Tokyo%20Kudanshita" target="_blank" rel="noopener">Google Map</a>
+          <a class="small-btn blue" href="https://maps.app.goo.gl/XHGzQ7RCbYR7LvmT7" target="_blank" rel="noopener">Google Map</a>
         </div>
       </div>
     </div>
@@ -582,21 +624,13 @@
       <h2>相關連結</h2>
     </div>
     <div class="links-grid">
-      <a class="link-card" href="itinerary.pdf" target="_blank" rel="noopener"><strong>📄 完整行程 PDF</strong><span>開啟活動行程文件</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Mitsui%20Garden%20Hotel%20Kashiwa-no-ha%20Park%20Side" target="_blank" rel="noopener"><strong>🗺️ 柏之葉飯店地圖</strong><span>Mitsui Garden Hotel Kashiwa-no-ha Park Side</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Hotel%20Villa%20Fontaine%20Tokyo%20Kudanshita" target="_blank" rel="noopener"><strong>🗺️ 東京飯店地圖</strong><span>Hotel Villa Fontaine Tokyo Kudanshita</span></a>
-      <a class="link-card" href="https://www.gardenhotels.co.jp/kashiwanoha-parkside/eng/" target="_blank" rel="noopener"><strong>🏨 柏之葉住宿官網</strong><span>三井ガーデンホテル柏の葉パークサイド</span></a>
-      <a class="link-card" href="https://www.hvf.jp/eng/kudanshita/" target="_blank" rel="noopener"><strong>🏨 東京九段下住宿官網</strong><span>Hotel Villa Fontaine Tokyo Kudanshita</span></a>
-      <a class="link-card" href="https://www.japan.travel/en/spot/1549/" target="_blank" rel="noopener"><strong>⛩ 成田新勝寺</strong><span>7/15 家長自由活動景點資訊</span></a>
+      <a class="link-card" href="itinerary.pdf" target="_blank" rel="noopener"><strong>📄 行程懶人包</strong><span>開啟活動行程文件</span></a>
+      <a class="link-card" href="https://www.japan.travel/en/spot/1549/" target="_blank" rel="noopener"><strong>⛩ 成田新勝寺</strong><span>7/15 家長參觀景點</span></a>
       <a class="link-card" href="https://mitsui-shopping-park.com/mop/makuhari/english/" target="_blank" rel="noopener"><strong>🛍 Mitsui Outlet 幕張</strong><span>7/16 家長購物行程</span></a>
       <a class="link-card" href="https://www.akebonoyama-nougyoukouen.jp/" target="_blank" rel="noopener"><strong>🌷 曙山農業公園</strong><span>7/16 家長參觀景點</span></a>
       <a class="link-card" href="https://www.tokyo-dome.co.jp/en/dome/access/" target="_blank" rel="noopener"><strong>🏟 東京巨蛋交通</strong><span>7/17 東京巨蛋集合參考</span></a>
-      <a class="link-card" href="https://www.giants.jp/en/" target="_blank" rel="noopener"><strong>⚾ 讀賣巨人官網</strong><span>東京巨蛋觀賽資訊</span></a>
       <a class="link-card" href="https://www.npb.jp/eng/" target="_blank" rel="noopener"><strong>⚾ NPB 官網</strong><span>日本職棒賽事資訊</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Naritasan%20Shinshoji%20Temple%20Narita" target="_blank" rel="noopener"><strong>📍 新勝寺地圖</strong><span>成田山新勝寺 Google Maps</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Mitsui%20Outlet%20Park%20Makuhari" target="_blank" rel="noopener"><strong>📍 Outlet 地圖</strong><span>Mitsui Outlet Park 幕張 Google Maps</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Akebonoyama%20Agricultural%20Park" target="_blank" rel="noopener"><strong>📍 曙山農業公園地圖</strong><span>Google Maps 開啟位置</span></a>
-      <a class="link-card" href="https://www.google.com/maps/search/?api=1&query=Tokyo%20Dome" target="_blank" rel="noopener"><strong>📍 東京巨蛋地圖</strong><span>Google Maps 開啟位置</span></a>
+      <a class="link-card" href="https://www.giants.jp/en/" target="_blank" rel="noopener"><strong>⚾ 讀賣巨人官網</strong><span>東京巨蛋觀賽資訊</span></a>
       <a class="link-card" href="TigerLine.jpg" target="_blank" rel="noopener"><strong>📢 家長公告</strong><span>LINE 群組QRCODE</span></a>
     </div>
   </section>
@@ -604,19 +638,23 @@
   <section>
     <div class="section-title">
       <small>NOTES</small>
-      <h2>行前備註</h2>
+      <h2>備註</h2>
     </div>
     <div class="notes">
-      <div class="note-card"><h3>集合與會合</h3><p>7/15、7/16 家長可依個人安排自由活動，但請留意與球隊會合時間。</p></div>
-      <div class="note-card"><h3>彈性調整</h3><p>友誼賽、練球與交通時間可能依天候、球場狀況與現場安排調整。</p></div>
-      <div class="note-card"><h3>公告優先</h3><p>餐廳、集合點照片、即時提醒與臨時異動，建議以帶隊教練團公告為準。</p></div>
-    </div>
+      <div class="note-card"><h3>聯繫窗口</h3>
+      <p>
+        大會工作人員：Richard<br/>
+        教練團：杜教練 顏教練 謝教練 林教練<br/>
+        家長聯繫窗口：小比媽 宇陽媽 定弘爸<br/>
+      </p>
+      </div>
+       </div>
   </section>
 
   <footer>
     <strong>2026 盛夏東京移地暑訓</strong><br />
-    野球虎日本千葉國際交流｜Full Website<br />
-    <small>最後更新：重新補齊連結、地圖、住宿與最新每日行程</small>
+    野球虎日本千葉國際交流活動<br />
+    <small>最後更新：2026-07-11</small>
   </footer>
 
   <script>
@@ -628,8 +666,12 @@
       const ids = ["days", "hours", "minutes", "seconds"];
       if (diff <= 0) {
         ids.forEach(id => document.getElementById(id).textContent = "00");
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("countdownFinished").style.display = "block";
         return;
       }
+      document.getElementById("countdown").style.display = "grid";
+      document.getElementById("countdownFinished").style.display = "none";
       const days = Math.floor(diff / 86400000);
       const hours = Math.floor((diff / 3600000) % 24);
       const minutes = Math.floor((diff / 60000) % 60);
