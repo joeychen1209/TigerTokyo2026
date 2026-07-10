@@ -363,17 +363,25 @@
 
     @media (max-width: 560px) {
       section { padding: 16px 16px; }
-      .hero {
-        min-height: calc(100svh - 58px);
-        place-items: start center;
-        padding: 28px 16px 72px;
-        background-size:
-          cover,
-          cover;
-        background-position:
-          center,
-          center top;
-      }
+        .hero {
+          min-height: auto;
+          place-items: start center;
+          padding: 24px 16px 90px;
+
+          background-size:
+            cover,
+            72vw auto;
+
+          background-position:
+            center,
+            center 72%;
+
+          background-repeat:
+            no-repeat,
+            no-repeat;
+
+          background-color: #202738;
+        }
       .overview, .links-grid, .notes { grid-template-columns: 1fr; }
       .countdown {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -392,7 +400,7 @@
 </head>
 <body>
   <nav class="nav">
-    <div class="brand"><span class="brand-mark">野</span> 野球虎東京暑訓</div>
+    <div class="brand"><span class="brand-mark">野</span> 野球虎日本暑訓</div>
     <div class="nav-links">
       <a href="#about">旅程亮點</a>
       <a href="#timeline">行程總覽</a>
@@ -405,7 +413,7 @@
 
   <header class="hero">
     <div class="hero-inner">
-      <div class="eyebrow">2026.07.13 - 07.18｜日本東京・千葉</div>
+      <div class="eyebrow">2026.07.13 - 07.18｜日本千葉</div>
       <h1>盛夏東京移地暑訓</h1>
       <p class="hero-lead">野球虎日本千葉國際交流活動</p>
       <div class="cta-row">
