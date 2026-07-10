@@ -87,33 +87,28 @@
     .nav-links a:hover { opacity: 1; color: #ffdca8; }
 
     .hero {
-      min-height: calc(100svh - 58px);
+      min-height: 88vh;
       display: grid;
-      place-items: start center;
+      place-items: center;
       color: #fff;
       text-align: center;
-      padding: clamp(28px, 5vh, 54px) 20px 96px;
+      padding: 10px 20px;
       background:
         linear-gradient(135deg, rgba(20, 28, 47, .92), rgba(255, 122, 24, .78)),
         url("background.png");
-      background-size:
-        cover,
-        auto min(72vh, 760px);
-      background-position:
-        center,
-        center 46%;
-      background-repeat:
-        no-repeat,
-        no-repeat;
+      /* 改這裡 */
+      background-size: auto 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* 圖片沒有覆蓋的位置使用深藍底 */
       background-color: #202738;
       position: relative;
       overflow: hidden;
     }
-
-    .hero .hero-inner {
-      transform: none;
-      width: min(1040px, 100%);
-    }
+  .hero .hero-inner {
+    transform: translateY(-40px);
+  }
     .hero::after {
       content: "";
       position: absolute;
@@ -363,17 +358,7 @@
 
     @media (max-width: 560px) {
       section { padding: 16px 16px; }
-      .hero {
-        min-height: calc(100svh - 58px);
-        place-items: start center;
-        padding: 28px 16px 72px;
-        background-size:
-          cover,
-          auto min(56vh, 520px);
-        background-position:
-          center,
-          center 44%;
-      }
+      .hero { min-height: auto; padding: 72px 16px 58px; }
       .overview, .links-grid, .notes { grid-template-columns: 1fr; }
       .countdown {
         grid-template-columns: repeat(4, minmax(0, 1fr));
