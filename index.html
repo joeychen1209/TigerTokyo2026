@@ -96,8 +96,13 @@
       background:
         linear-gradient(135deg, rgba(20, 28, 47, .92), rgba(255, 122, 24, .78)),
         url("background.png");
-      background-size: cover;
+      /* 改這裡 */
+      background-size: auto 80%;
       background-position: center;
+      background-repeat: no-repeat;
+
+      /* 圖片沒有覆蓋的位置使用深藍底 */
+      background-color: #202738;
       position: relative;
       overflow: hidden;
     }
@@ -390,7 +395,7 @@
       <p class="hero-lead">野球虎日本千葉國際交流活動</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#schedule">查看每日行程</a>
-        <a class="btn btn-ghost" href="itinerary.pdf" target="_blank">完整 PDF</a>
+        <a class="btn btn-ghost" href="itinerary.pdf" target="_blank">行程懶人包</a>
       </div>
       <div class="countdown" id="countdown" aria-label="行程倒數">
         <div class="count-box"><strong id="days">00</strong><span>天</span></div>
