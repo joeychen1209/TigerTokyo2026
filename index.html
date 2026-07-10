@@ -92,7 +92,7 @@
       place-items: center;
       color: #fff;
       text-align: center;
-      padding: 84px 20px 64px;
+      padding: 10px 20px;
       background:
         linear-gradient(135deg, rgba(20, 28, 47, .92), rgba(255, 122, 24, .78)),
         url("background.png");
@@ -101,7 +101,9 @@
       position: relative;
       overflow: hidden;
     }
-
+  .hero .hero-inner {
+    transform: translateY(-40px);
+  }
     .hero::after {
       content: "";
       position: absolute;
@@ -120,9 +122,9 @@
 
     .eyebrow {
       display: inline-flex;
-      gap: 8px;
+      gap: 4px;
       align-items: center;
-      padding: 8px 16px;
+      padding: 8px 4px;
       border-radius: 999px;
       background: rgba(255, 255, 255, .16);
       border: 1px solid rgba(255, 255, 255, .38);
@@ -133,7 +135,7 @@
     }
 
     h1 {
-      font-size: clamp(38px, 5vw, 82px);
+      font-size: clamp(38px, 4vw, 82px);
       line-height: 1.05;
       margin: 0 0 18px;
       font-weight: 950;
@@ -258,7 +260,7 @@
 
     .notice {
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1fr 1fr;
       gap: 18px;
       align-items: stretch;
       margin-top: 22px;
@@ -384,7 +386,7 @@
   <header class="hero">
     <div class="hero-inner">
       <div class="eyebrow">2026.07.13 - 07.18｜日本千葉・東京</div>
-      <h1>2026 盛夏東京移地暑訓</h1>
+      <h1>盛夏東京移地暑訓</h1>
       <p class="hero-lead">野球虎日本千葉國際交流活動</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#schedule">查看每日行程</a>
@@ -415,12 +417,12 @@
     </div>
     <div class="notice">
       <div class="notice-card">
-        <h3>行程閱讀方式</h3>
-        <p>每日卡片分為「球員行程」與「家長行程」。7/15、7/16 家長可依個人安排自由活動，但請留意與球隊會合時間。</p>
-      </div>
-      <div class="notice-card">
         <h3>Day 6 接駁提醒</h3>
         <p>7/18 10:00 於飯店大廳集合，前往成田機場。</p>
+      </div>
+      <div class="notice-card">
+        <h3>行程閱讀方式</h3>
+        <p>每日卡片分為「球員行程」與「家長行程」。7/15、7/16 家長可依個人安排自由活動，但請留意與球隊會合時間。</p>
       </div>
     </div>
   </section>
@@ -472,7 +474,7 @@
               <li>飯店步行約 7 分鐘有全家，飯店坐落於棒球場旁。</li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">抵達日</span><span class="tag green">手套保養</span></div>
+          <div class="tag-row"><span class="tag green">抵達日</span><span class="tag">手套保養</span></div>
         </div>
       </article>
 
@@ -492,7 +494,7 @@
           </div>
           <div class="daily-reminder">✍️ 今日提醒：請帶簽字筆。</div>
           <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4><ul><li>建議準備防曬、飲水、輕便隨身包。</li><li>觀賽時可拍照記錄孩子的球場體驗。</li></ul></div>
-          <div class="tag-row"><span class="tag">鎌谷球場</span><span class="tag green">球場體驗</span></div>
+          <div class="tag-row"><span class="tag green">鎌谷球場</span><span class="tag">球場體驗</span></div>
         </div>
       </article>
 
@@ -523,7 +525,7 @@
               <li>晚餐 球員享用日式餐盒，家長自理。</li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">甲子園</span><span class="tag">友誼賽</span><span class="tag green">體驗訓練</span><span class="tag blue">新勝寺</span></div>
+          <div class="tag-row"><span class="tag green">甲子園</span><span class="tag green">友誼賽</span><span class="tag">體驗訓練</span><span class="tag blue">新勝寺</span></div>
         </div>
       </article>
 
@@ -557,7 +559,7 @@
               <li>晚餐 球員待定，家長自理或聚餐。</li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">友誼賽</span><span class="tag green">科學化訓練</span><span class="tag blue">Mitsui Outlet</span></div>
+          <div class="tag-row"><span class="tag green">友誼賽</span><span class="tag">科學化訓練</span><span class="tag blue">Mitsui Outlet</span><span class="tag blue">曙山農業公園</span></div>
         </div>
       </article>
 
@@ -572,8 +574,8 @@
               <li><span class="time">18:00</span><span>觀賞 讀賣巨人 vs 中日龍 比賽。</span></li>
             </ul>
           </div>
-          <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4><ul><li>餐食提醒：全日餐食皆為自理。</li></ul></div>
-          <div class="tag-row"><span class="tag">自由行</span><span class="tag">東京巨蛋</span></div>
+          <div class="track parent"><h4>👨‍👩‍👧 家長提醒</h4><ul><li>餐食提醒：全日餐食皆為自理。</li></ul></div>
+          <div class="tag-row"><span class="tag green">自由行</span><span class="tag green">東京巨蛋</span></div>
         </div>
       </article>
 
@@ -587,7 +589,7 @@
               <li><span class="time">12:00</span><span>抵達成田機場。</span></li>
             </ul>
           </div>
-          <div class="tag-row"><span class="tag">返台日</span></div>
+          <div class="tag-row"><span class="tag green">返台日</span></div>
         </div>
       </article>
     </div>
