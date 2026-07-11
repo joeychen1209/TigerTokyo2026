@@ -86,6 +86,44 @@
 
     .nav-links a:hover { opacity: 1; color: #ffdca8; }
 
+    /* 錨點定位時預留上方導覽列空間 */
+    section, .day-card {
+      scroll-margin-top: 118px;
+    }
+
+    /* 每日行程第二階選單 */
+    .day-subnav {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      margin: -8px 0 22px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .day-subnav a {
+      flex: 0 0 auto;
+      min-width: 82px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      color: #d95f00;
+      background: #fff1db;
+      border: 1px solid #ffd39c;
+      box-shadow: 0 6px 16px rgba(20, 28, 47, .06);
+    }
+
+    .day-subnav a:hover,
+    .day-subnav a:focus-visible {
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      outline: none;
+    }
+
     .hero {
       min-height: calc(100svh - 58px);
       display: grid;
@@ -358,7 +396,34 @@
     @media (max-width: 960px) {
       .overview, .links-grid, .notes { grid-template-columns: repeat(2, 1fr); }
       .notice, .schedule-grid, .hotel-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-bottom: 8px;
+      }
+
+      .nav-links {
+        display: flex;
+        order: 2;
+        width: 100%;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 2px 0 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-links::-webkit-scrollbar { display: none; }
+
+      .nav-links a {
+        flex: 0 0 auto;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.10);
+        border: 1px solid rgba(255,255,255,.16);
+        font-size: 13px;
+      }
     }
 
     @media (max-width: 560px) {
@@ -395,6 +460,19 @@
       .count-box span { font-size: 11px; }
       .time-list li { grid-template-columns: 72px 1fr; }
       .brand { font-size: 14px; }
+      section, .day-card { scroll-margin-top: 126px; }
+      .day-subnav {
+        position: sticky;
+        top: 104px;
+        z-index: 18;
+        margin: -4px -16px 18px;
+        padding: 9px 16px;
+        background: rgba(255,250,243,.96);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255,122,24,.10);
+        border-bottom: 1px solid rgba(255,122,24,.14);
+      }
+      .day-subnav a { min-width: 74px; padding: 8px 12px; font-size: 13px; }
     }
   </style>
 </head>
@@ -402,10 +480,8 @@
   <nav class="nav">
     <div class="brand"><span class="brand-mark">野</span> 野球虎日本暑訓</div>
     <div class="nav-links">
-      <a href="#about">旅程亮點</a>
       <a href="#timeline">行程總覽</a>
       <a href="#schedule">每日行程</a>
-      <a href="#parents">家長行程</a>
       <a href="#hotels">住宿</a>
       <a href="#links">相關連結</a>
     </div>
@@ -476,10 +552,19 @@
       <small>DAILY SCHEDULE</small>
       <h2>每日行程</h2>
     </div>
+    <nav class="day-subnav" aria-label="每日行程快速選單">
+      <a href="#day1">Day 1<br>7/13</a>
+      <a href="#day2">Day 2<br>7/14</a>
+      <a href="#day3">Day 3<br>7/15</a>
+      <a href="#day4">Day 4<br>7/16</a>
+      <a href="#day5">Day 5<br>7/17</a>
+      <a href="#day6">Day 6<br>7/18</a>
+    </nav>
     <div class="schedule-grid">
-      <article class="day-card">
+      <article class="day-card" id="day1">
         <div class="day-head"><small>DAY 1｜7/13（一）</small><h3>抵達與初探</h3></div>
         <div class="day-body">
+          <div class="daily-reminder">👕 今日提醒：球員紀念衣(僅上身)，家長配合。</div>
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">14:15</span><span>成田機場於T2 B口(北口)集合，搭乘巴士出發。</span></li>
@@ -493,8 +578,6 @@
               <li><span class="time">16:30</span><span>前往LaLaport。</span></li>
             </ul>
           </div>
-          <div class="daily-reminder">👕 今日提醒：請穿千葉球服。</div>
-
           <div class="track"><h4>📝 備註</h4>
             <ul>
               <li>下機後請先購買便利的餐點。</li>
@@ -506,9 +589,12 @@
         </div>
       </article>
 
-      <article class="day-card">
+      <article class="day-card" id="day2">
         <div class="day-head"><small>DAY 2｜7/14（二）</small><h3>職棒見習日</h3></div>
-        <div class="day-body">
+        <div class="day-body">          
+          <div class="daily-reminder">
+            👕 今日提醒：球員比賽衣(全套)，家長配合。
+          </div>
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">06:30</span><span>飯店早餐 Start。</span></li>
@@ -520,15 +606,18 @@
               <li><span class="time">18:30</span><span>團體聚餐 @ KASHIWA BASE BBQ </span></li>
             </ul>
           </div>
-          <div class="daily-reminder">✍️ 今日提醒：請帶簽字筆。</div>
-          <div class="track"><h4>📝 備註</h4><ul><li>建議準備防曬、飲水、輕便隨身包。</li><li>觀賽時可拍照記錄孩子的球場體驗。</li></ul></div>
+          <div class="track"><h4>📝 備註</h4><ul><li>觀賽時可拍照記錄孩子的球場體驗。</li><li>可帶簽字筆</li></ul></div>
           <div class="tag-row"><span class="tag green">鎌谷球場</span><span class="tag">球場體驗</span></div>
         </div>
       </article>
 
-      <article class="day-card featured" id="parents">
+      <article class="day-card featured" id="day3">
         <div class="day-head"><small>DAY 3｜7/15（三）</small><h3>訓練與友誼交流</h3></div>
         <div class="day-body">
+          
+          <div class="daily-reminder">
+            👕 今日提醒：球員紀念衣(全套)。
+          </div>
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">06:30</span><span>飯店早餐 Start。</span></li>
@@ -539,7 +628,7 @@
               <li><span class="time">15:00</span><span>抵達球場，進行練球或友誼賽交流。</span></li>
             </ul>
           </div>
-          <div class="track parent"><h4>👨‍👩‍👧 家長行程</h4>
+          <div class="track parent" id="parents"><h4>👨‍👩‍👧 家長行程</h4>
             <ul class="time-list">
               <li><span class="time">08:30</span><span>前往柏之葉公園棒球場，觀賞甲子園預賽。</span></li>
               <li><span class="time">11:00</span><span>前往成田新勝寺。</span></li>
@@ -557,9 +646,12 @@
         </div>
       </article>
 
-      <article class="day-card featured">
+      <article class="day-card featured" id="day4">
         <div class="day-head"><small>DAY 4｜7/16（四）</small><h3>運科與友誼交流</h3></div>
         <div class="day-body">
+          <div class="daily-reminder">
+            👕 今日提醒：球員比賽衣(全套)。
+          </div>
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">06:30</span><span>飯店早餐 Start。</span></li>
@@ -591,9 +683,12 @@
         </div>
       </article>
 
-      <article class="day-card">
+      <article class="day-card" id="day5">
         <div class="day-head"><small>DAY 5｜7/17（五）</small><h3>自由行 + 東京巨蛋</h3></div>
         <div class="day-body">
+          <div class="daily-reminder">
+            👕 今日提醒：球員紀念衣(僅上身)，進場看球時穿著。
+          </div>
           <div class="track player"><h4>⚾ 球員行程</h4>
             <ul class="time-list">
               <li><span class="time">07:00</span><span>飯店早餐 Start。</span></li>
@@ -607,9 +702,12 @@
         </div>
       </article>
 
-      <article class="day-card">
+      <article class="day-card" id="day6">
         <div class="day-head"><small>DAY 6｜7/18（六）</small><h3>滿載回憶，平安返程</h3></div>
         <div class="day-body">
+          <div class="daily-reminder">
+            👕 今日提醒：便服。
+          </div>
           <div class="track player"><h4>🚌 球員與團隊</h4>
             <ul class="time-list">
               <li><span class="time">07:00</span><span>飯店早餐 Start。</span></li>
@@ -655,6 +753,8 @@
     </div>
     <div class="links-grid">
       <a class="link-card" href="itinerary.pdf" target="_blank" rel="noopener"><strong>📄 行程懶人包</strong><span>開啟活動行程文件</span></a>
+      <a class="link-card" href="group.pdf" target="_blank" rel="noopener"><strong>📄 活動分組名單</strong><span>開啟活動分組文件</span></a>
+      <a class="link-card" href="https://docs.google.com/spreadsheets/d/18W-Xfqkv9sbbstmCcSh-OPtKfyyl25UeKsoW7MLf97g" target="_blank" rel="noopener"><strong>📄 行程人數統計表</strong><span>開啟統計表</span></a>
       <a class="link-card" href="https://www.japan.travel/en/spot/1549/" target="_blank" rel="noopener"><strong>⛩ 成田新勝寺</strong><span>7/15 家長參觀景點</span></a>
       <a class="link-card" href="https://mitsui-shopping-park.com/mop/makuhari/english/" target="_blank" rel="noopener"><strong>🛍 Mitsui Outlet 幕張</strong><span>7/16 家長購物行程</span></a>
       <a class="link-card" href="https://www.akebonoyama-nougyoukouen.jp/" target="_blank" rel="noopener"><strong>🌷 曙山農業公園</strong><span>7/16 家長參觀景點</span></a>
